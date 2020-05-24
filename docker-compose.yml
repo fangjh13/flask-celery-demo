@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  flask-celery-service:
+    build: .
+    image: flask-celery
+    ports:
+      - "5000:5000"
+    env_file: .env
+    restart: always
+    depends_on:
+      - redis
+
+  worker:
+    build: .
+    image: celery-worker
+    command: ["/bin/bash", "./run.sh", "celery-worker"]
+    depends_on:
+      - redis
+    restart: always
+
+  beat:
+    build: .
+    image: celery-beat
+    command: ["/bin/bash", "./run.sh", "celery-beat"]
+    depends_on:
+      - worker
+      - redis
+    restart: always
+
+  redis:
+    image: "redis:6.0.3"
+    restart: always
