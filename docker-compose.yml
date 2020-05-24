@@ -5,7 +5,6 @@ services:
     image: flask-celery
     ports:
       - "5000:5000"
-    env_file: .env
     restart: always
     depends_on:
       - redis
