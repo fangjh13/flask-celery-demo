@@ -1,6 +1,6 @@
 amqp==2.5.2
 billiard==3.6.3.0
-celery==4.4.2
+celery==5.2.2
 click==7.1.2
 Flask==1.1.2
 gevent==20.5.0
